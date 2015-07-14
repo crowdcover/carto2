@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map[]>
+<Map srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+
+<Parameters>
+  <Parameter name="center">0,0,3</Parameter>
+  <Parameter name="format">pbf</Parameter>
+  <Parameter name="json"><![CDATA[{"vector_layers":[{"id":"data","description":"moabi_transport","fields":{"osm_id":"Number","name":"String","ref":"String","highway":"String","proposed":"String","elementtype":"String"}}]}]]></Parameter>
+  <Parameter name="maxzoom">6</Parameter>
+  <Parameter name="minzoom">0</Parameter>
+  <Parameter name="name"><![CDATA[moabi_transport]]></Parameter>
+</Parameters>
+
+
+<Layer name="data"
+  buffer-size="8"
+  srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    
+    <Datasource>
+       <Parameter name="dbname"><![CDATA[moabi]]></Parameter>
+       <Parameter name="extent"><![CDATA[-20037508.34,-20037508.34,20037508.34,20037508.34]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[]]></Parameter>
+       <Parameter name="geometry_table"><![CDATA[]]></Parameter>
+       <Parameter name="host"><![CDATA[localhost]]></Parameter>
+       <Parameter name="key_field"><![CDATA[]]></Parameter>
+       <Parameter name="max_size"><![CDATA[512]]></Parameter>
+       <Parameter name="password"><![CDATA[]]></Parameter>
+       <Parameter name="port"><![CDATA[]]></Parameter>
+       <Parameter name="table"><![CDATA[(SELECT osm_id, name, ref, highway, (tags -> 'proposed') as proposed, way, 'way' as elementType
+ FROM planet_osm_line
+ WHERE highway IS NOT NULL AND (tags->'proposed')='true') AS data]]></Parameter>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="user"><![CDATA[]]></Parameter>
+    </Datasource>
+  </Layer>
+
+</Map>
